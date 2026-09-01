@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScrapLedger</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand-wrap">
+          <div class="brand-mark">S</div>
+          <div>
+            <div class="brand-name">ScrapLedger</div>
+            <div class="brand-subtitle">Metal Trading</div>
+          </div>
+        </div>
+
+        <nav class="nav" id="nav">
+          <button class="nav-item active" data-page="dashboard">Dashboard</button>
+          <button class="nav-item" data-page="purchases">Purchases</button>
+          <button class="nav-item" data-page="sales">Sales</button>
+          <button class="nav-item" data-page="inventory">Inventory</button>
+          <button class="nav-item" data-page="customers">Customers</button>
+          <button class="nav-item" data-page="suppliers">Suppliers</button>
+          <button class="nav-item" data-page="expenses">Expenses</button>
+          <button class="nav-item" data-page="payments">Payments</button>
+          <button class="nav-item" data-page="profitloss">Profit &amp; Loss</button>
+          <button class="nav-item" data-page="reports">Reports</button>
+          <button class="nav-item" data-page="metals">Metal Types</button>
+          <button class="nav-item" data-page="settings">Settings</button>
+        </nav>
+      </aside>
+
+      <div class="main-panel">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="icon-button mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
+            <h1 id="pageTitle">Dashboard</h1>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="search-wrap">
+              <div class="search-box">
+                <span>⌕</span>
+                <input id="globalSearch" type="search" placeholder="Search customers, suppliers, metals, IDs..." />
+              </div>
+              <div id="globalSearchResults" class="search-results"></div>
+            </div>
+            <button class="button button-primary" data-quick="purchase">+ New Purchase</button>
+            <button class="button button-secondary" data-quick="sale">+ New Sale</button>
+          </div>
+        </header>
+
+        <main class="page-shell">
+          <section id="dashboard-page" class="page active"></section>
+          <section id="purchases-page" class="page"></section>
+          <section id="sales-page" class="page"></section>
+          <section id="inventory-page" class="page"></section>
+          <section id="customers-page" class="page"></section>
+          <section id="suppliers-page" class="page"></section>
+          <section id="expenses-page" class="page"></section>
+          <section id="payments-page" class="page"></section>
+          <section id="profitloss-page" class="page"></section>
+          <section id="reports-page" class="page"></section>
+          <section id="metals-page" class="page"></section>
+          <section id="settings-page" class="page"></section>
+        </main>
+      </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <div id="modalRoot"></div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/purchases.js"></script>
+    <script src="js/sales.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/customers.js"></script>
+    <script src="js/suppliers.js"></script>
+    <script src="js/expenses.js"></script>
+    <script src="js/payments.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/search.js"></script>
+  </body>
+</html>
