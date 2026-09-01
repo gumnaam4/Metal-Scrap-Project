@@ -9,7 +9,8 @@
   SL.currentPage = 'dashboard';
 
   function saveState() {
-    SL.state = SL.storage.ensureInventoryForMetals();
+    const currentState = SL.state || SL.storage.loadData();
+    SL.state = SL.storage.ensureInventoryForMetals(currentState);
     SL.storage.saveData(SL.state);
   }
 
@@ -64,13 +65,37 @@
     }
   }
 
+  function toggleSidebar(forceOpen) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (!sidebar || !overlay) return;
+    const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !sidebar.classList.contains('open');
+    sidebar.classList.toggle('open', shouldOpen);
+    overlay.classList.toggle('open', shouldOpen);
+  }
+
   function bindEvents() {
     document.querySelectorAll('.nav-item').forEach((button) => {
-      button.addEventListener('click', () => setPage(button.dataset.page));
+      button.addEventListener('click', () => {
+        setPage(button.dataset.page);
+        toggleSidebar(false);
+      });
     });
 
     document.getElementById('mobileToggle').addEventListener('click', () => {
-      document.getElementById('sidebar').classList.toggle('open');
+      toggleSidebar();
+    });
+
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      toggleSidebar(false);
+    });
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const nextTheme = SL.state.settings.theme === 'dark' ? 'light' : 'dark';
+      SL.state.settings.theme = nextTheme;
+      document.body.classList.toggle('dark', nextTheme === 'dark');
+      document.getElementById('themeToggle').textContent = nextTheme === 'dark' ? '🌙' : '☀️';
+      SL.app.saveState();
     });
 
     document.querySelectorAll('[data-quick]').forEach((button) => {
@@ -111,7 +136,12 @@
   }
 
   function initTheme() {
-    document.body.classList.toggle('dark', SL.state.settings.theme === 'dark');
+    const theme = SL.state.settings.theme || 'light';
+    document.body.classList.toggle('dark', theme === 'dark');
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
   }
 
   function init() {

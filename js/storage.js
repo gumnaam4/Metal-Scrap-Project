@@ -88,17 +88,17 @@
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || JSON.stringify(getDefaultState()));
   }
 
-  function ensureInventoryForMetals() {
-    const data = loadData();
-    const inventoryMap = { ...data.inventory };
-    data.metals.forEach((metal) => {
+  function ensureInventoryForMetals(data = loadData()) {
+    const state = data || loadData();
+    const inventoryMap = { ...state.inventory };
+    state.metals.forEach((metal) => {
       if (!inventoryMap[metal.id]) {
         inventoryMap[metal.id] = { metalId: metal.id, quantity: 0, averageCost: 0, lastUpdated: null };
       }
     });
-    data.inventory = inventoryMap;
-    saveData(data);
-    return data;
+    state.inventory = inventoryMap;
+    saveData(state);
+    return state;
   }
 
   function generateId(prefix = 'id') {

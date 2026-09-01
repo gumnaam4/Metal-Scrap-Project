@@ -84,6 +84,21 @@ body {
   z-index: 100;
 }
 
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 20;
+}
+
+.sidebar-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .brand-wrap {
   display: flex;
   align-items: center;
@@ -150,6 +165,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 30;
+}
+
+.sidebar.open {
+  z-index: 60;
 }
 
 body.dark .topbar {
@@ -427,6 +446,29 @@ body.dark .topbar {
   border-radius: 9px;
   width: 40px;
   height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 7px 8px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+}
+
+.theme-toggle {
+  font-size: 1.1rem;
 }
 
 .table-wrap {
@@ -611,10 +653,17 @@ textarea {
 .status-pill.overdue { background: var(--red-soft); color: var(--red); }
 
 @media (max-width: 900px) {
+  .mobile-toggle {
+    display: inline-flex;
+  }
+
   .sidebar {
     position: fixed;
     left: 0;
+    top: 0;
+    height: 100vh;
     transform: translateX(-105%);
+    box-shadow: var(--shadow);
   }
 
   .sidebar.open {
@@ -629,6 +678,10 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .search-wrap {
+    width: 100%;
+  }
+
   .search-box {
     min-width: 0;
     width: 100%;
@@ -636,6 +689,7 @@ textarea {
 
   .topbar {
     flex-wrap: wrap;
+    gap: 12px;
   }
 
   .topbar-actions {
