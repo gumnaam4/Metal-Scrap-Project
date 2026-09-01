@@ -40,6 +40,30 @@
       auditLog: [],
       closes: [],
       attachments: [],
+      vehicleRecords: [],
+      favoriteVehicleIds: [],
+      recentVehicles: [],
+      vehicleComposition: {
+        ferrousPercent: 65,
+        aluminiumPercent: 8,
+        copperPercent: 2,
+        batteryPercent: 1.5,
+        otherPercent: 23.5,
+        updatedAt: new Date().toISOString(),
+      },
+      scrapRates: {
+        ferrous: 28,
+        aluminium: 42,
+        copper: 170,
+        battery: 18,
+        other: 11,
+        updatedAt: new Date().toISOString(),
+      },
+      vehicleParts: [
+        'Engine', 'Gearbox', 'Alternator', 'Starter motor', 'ECU', 'AC compressor', 'Radiator',
+        'Doors', 'Bonnet', 'Headlights', 'Tail lights', 'Wheels', 'Tyres', 'Catalytic converter',
+        'Suspension components', 'Other'
+      ],
     };
   }
 
@@ -59,6 +83,12 @@
     merged.auditLog = Array.isArray(incoming.auditLog) ? incoming.auditLog : base.auditLog;
     merged.closes = Array.isArray(incoming.closes) ? incoming.closes : base.closes;
     merged.attachments = Array.isArray(incoming.attachments) ? incoming.attachments : base.attachments;
+    merged.vehicleRecords = Array.isArray(incoming.vehicleRecords) ? incoming.vehicleRecords : base.vehicleRecords;
+    merged.favoriteVehicleIds = Array.isArray(incoming.favoriteVehicleIds) ? incoming.favoriteVehicleIds : base.favoriteVehicleIds;
+    merged.recentVehicles = Array.isArray(incoming.recentVehicles) ? incoming.recentVehicles : base.recentVehicles;
+    merged.vehicleComposition = { ...base.vehicleComposition, ...(incoming.vehicleComposition || {}) };
+    merged.scrapRates = { ...base.scrapRates, ...(incoming.scrapRates || {}) };
+    merged.vehicleParts = Array.isArray(incoming.vehicleParts) ? incoming.vehicleParts : base.vehicleParts;
     return merged;
   }
 

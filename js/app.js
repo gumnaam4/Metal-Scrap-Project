@@ -57,6 +57,9 @@
     if (pageName === 'reports') {
       if (typeof SL.modules.reports.render === 'function') SL.modules.reports.render();
     }
+    if (pageName === 'vehiclevaluation') {
+      if (typeof SL.modules.vehicleValuation.render === 'function') SL.modules.vehicleValuation.render();
+    }
     if (pageName === 'metals') {
       if (typeof SL.modules.settings.renderMetals === 'function') SL.modules.settings.renderMetals();
     }
